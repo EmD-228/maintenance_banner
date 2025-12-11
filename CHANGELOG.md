@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.1] - 2024-12-11
+## [0.1.1] - 2024-12-11
 
 ### Changed
 - Translated all content to English
@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 - Fixed negative height constraint issue in banner widget
 - Improved safe area handling
 
-## [1.0.0] - 2024-01-01
+## [0.1.0] - 2024-01-01
 
 ### Added
 - Initial release
