@@ -49,7 +49,13 @@ echo -e "${GREEN}New version: ${NEW_VERSION}${NC}"
 
 # Update pubspec.yaml
 echo -e "${YELLOW}Updating pubspec.yaml...${NC}"
-sed -i '' "s/^version: .*/version: ${NEW_VERSION}/" pubspec.yaml
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS
+  sed -i '' "s/^version: .*/version: ${NEW_VERSION}/" pubspec.yaml
+else
+  # Linux
+  sed -i "s/^version: .*/version: ${NEW_VERSION}/" pubspec.yaml
+fi
 
 # Update CHANGELOG.md
 echo -e "${YELLOW}Updating CHANGELOG.md...${NC}"
@@ -67,15 +73,15 @@ CHANGELOG_ENTRY="## [${NEW_VERSION}] - ${TODAY}
 "
 
 # Insert after the Changelog header
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # macOS
-  sed -i '' "2a\\
-${CHANGELOG_ENTRY}
-" CHANGELOG.md
-else
-  # Linux
-  sed -i "2a\\${CHANGELOG_ENTRY}" CHANGELOG.md
-fi
+# Create temporary file with new changelog entry
+TEMP_CHANGELOG=$(mktemp)
+{
+  head -n 1 CHANGELOG.md
+  echo ""
+  echo "$CHANGELOG_ENTRY"
+  tail -n +2 CHANGELOG.md
+} > "$TEMP_CHANGELOG"
+mv "$TEMP_CHANGELOG" CHANGELOG.md
 
 # Commit changes
 echo -e "${YELLOW}Committing changes...${NC}"
