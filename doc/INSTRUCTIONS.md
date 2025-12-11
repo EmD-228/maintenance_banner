@@ -1,16 +1,15 @@
-# Instructions pour ajouter la capture d'écran
+# Instructions for Adding Screenshot
 
-Pour que l'image s'affiche sur pub.dev et dans le README :
+To display the image on pub.dev and in the README:
 
-1. Placez votre capture d'écran dans ce dossier avec le nom `screenshot.png`
-2. L'image sera automatiquement référencée dans le README.md principal
+1. Place your screenshot in this folder with the name `screenshot.png`
+2. The image will be automatically referenced in the main README.md
 
-**Recommandations :**
-- Format : PNG ou JPG
-- Nom du fichier : `screenshot.png` (ou `screenshot.jpg`)
-- Taille recommandée : Largeur d'environ 400-800px pour une bonne qualité sur pub.dev
+**Recommendations:**
+- Format: PNG or JPG
+- File name: `screenshot.png` (or `screenshot.jpg`)
+- Recommended size: Width of approximately 400-800px for good quality on pub.dev
 
-L'image sera affichée :
-- En haut du README (juste après la description)
-- Dans la section "Example App"
-
+The image will be displayed:
+- At the top of the README (right after the description)
+- In the "Example App" section

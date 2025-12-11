@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Affichez une bannière de maintenance élégante en haut de votre application',
+                    'Display an elegant maintenance banner at the top of your application',
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'Mode maintenance',
+                          'Maintenance mode',
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       child: Text(
-                        isUnderMaintenance ? 'ACTIF' : 'INACTIF',
+                        isUnderMaintenance ? 'ACTIVE' : 'INACTIVE',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -155,8 +155,8 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(width: 8),
                     Text(
                       isUnderMaintenance
-                          ? 'Désactiver la maintenance'
-                          : 'Activer la maintenance',
+                          ? 'Deactivate maintenance'
+                          : 'Activate maintenance',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'Personnalisation',
+                          'Customization',
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -200,28 +200,28 @@ class _HomePageState extends State<HomePage> {
                     _buildFeatureItem(
                       context,
                       Icons.palette_outlined,
-                      'Couleurs personnalisables',
+                      'Customizable colors',
                       colorScheme,
                     ),
                     const SizedBox(height: 12),
                     _buildFeatureItem(
                       context,
                       Icons.text_fields,
-                      'Message personnalisé',
+                      'Custom message',
                       colorScheme,
                     ),
                     const SizedBox(height: 12),
                     _buildFeatureItem(
                       context,
                       Icons.height,
-                      'Hauteur ajustable',
+                      'Adjustable height',
                       colorScheme,
                     ),
                     const SizedBox(height: 12),
                     _buildFeatureItem(
                       context,
                       Icons.emoji_emotions_outlined,
-                      'Icône personnalisée',
+                      'Custom icon',
                       colorScheme,
                     ),
                   ],

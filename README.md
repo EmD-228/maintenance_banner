@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           height: 32,
           color: Colors.orange,
           child: const Center(
-            child: Text('Application en maintenance'),
+            child: Text('Application under maintenance'),
           ),
         ),
         child: HomePage(),
@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp> {
           color: Colors.orange,
           child: const Center(
             child: Text(
-              'Application en maintenance',
+              'Application under maintenance',
               style: TextStyle(color: Colors.white),
             ),
           ),

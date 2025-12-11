@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 SizedBox(width: 8),
                 Text(
-                  'Application en maintenance',
+                  'Application under maintenance',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,

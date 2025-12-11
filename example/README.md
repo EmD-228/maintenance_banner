@@ -23,7 +23,7 @@ This is an example application demonstrating how to use the `maintenance_banner`
 - Basic usage of `MaintenanceWrapper`
 - Toggle maintenance mode on/off
 - Customizable banner appearance
-- Reactive updates using GetX
+- State management with setState
 
 ## Usage
 
