@@ -20,7 +20,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  maintenance_banner: ^0.1.0
+  maintenance_banner: ^0.2.0
 ```
 
 Then run:
