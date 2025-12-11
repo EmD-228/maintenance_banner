@@ -77,3 +77,8 @@ coverage/
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+
+# Scripts and sensitive files (not for public repository)
+update_version.sh
+UPDATE_README.md
+*.sh
