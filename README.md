@@ -11,6 +11,8 @@ A Flutter package for displaying customizable maintenance banners at the top of 
 - 🔄 **Simple Integration**: Easy to integrate with `MaintenanceWrapper`
 - 🎯 **Flexible**: Works with any state management solution (setState, Provider, Bloc, etc.)
 - ⚡ **Lightweight**: No external dependencies except Flutter
+- ✨ **Smooth Animations**: Beautiful slide and fade animations when banner appears/disappears
+- 🔔 **Callbacks Support**: Get notified when banner is shown or hidden
 
 ## Installation
 
@@ -100,18 +102,24 @@ The `MaintenanceWrapper` widget accepts the following parameters:
 | `banner` | `Widget` | Yes | The custom banner widget to display |
 | `child` | `Widget` | Yes | The child widget (your app content) |
 | `topPadding` | `double?` | No | Custom top padding. If null, uses safe area padding - 8 |
-| `message` | `String?` | No | (Legacy) Message for banner (if not using custom banner) |
-| `backgroundColor` | `Color?` | No | (Legacy) Background color (if not using custom banner) |
-| `textColor` | `Color?` | No | (Legacy) Text color (if not using custom banner) |
-| `height` | `double?` | No | (Legacy) Banner height (if not using custom banner) |
-| `icon` | `String?` | No | (Legacy) Icon emoji (if not using custom banner) |
+| `animationDuration` | `Duration?` | No | Duration of the animation. Defaults to 300ms |
+| `onBannerShown` | `VoidCallback?` | No | Callback called when the banner is shown |
+| `onBannerHidden` | `VoidCallback?` | No | Callback called when the banner is hidden |
 
-### Advanced Example
+### Advanced Example with Animations and Callbacks
 
 ```dart
 MaintenanceWrapper(
   isUnderMaintenance: maintenanceController.isMaintenanceMode,
   topPadding: 0, // Override default padding
+  animationDuration: const Duration(milliseconds: 500), // Custom animation speed
+  onBannerShown: () {
+    print('Maintenance banner is now visible');
+    // Track analytics, show notification, etc.
+  },
+  onBannerHidden: () {
+    print('Maintenance banner is now hidden');
+  },
   banner: Container(
     height: 40,
     decoration: BoxDecoration(
@@ -125,7 +133,7 @@ MaintenanceWrapper(
         Icon(Icons.build, color: Colors.white, size: 20),
         SizedBox(width: 8),
         Text(
-          'Maintenance en cours',
+          'Maintenance in progress',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

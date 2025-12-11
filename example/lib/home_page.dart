@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+    required this.isUnderMaintenance,
+    required this.onMaintenanceChanged,
+    this.lastBannerEvent,
+  });
+
+  final bool isUnderMaintenance;
+  final ValueChanged<bool> onMaintenanceChanged;
+  final String? lastBannerEvent;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isUnderMaintenance = true;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                           width: 12,
                           height: 12,
                           decoration: BoxDecoration(
-                            color: isUnderMaintenance
+                            color: widget.isUnderMaintenance
                                 ? Colors.orange
                                 : Colors.green,
                             shape: BoxShape.circle,
@@ -101,22 +109,22 @@ class _HomePageState extends State<HomePage> {
                         vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: isUnderMaintenance
-                            ? Colors.orange.withOpacity(0.1)
-                            : Colors.green.withOpacity(0.1),
+                        color: widget.isUnderMaintenance
+                            ? Colors.orange.withValues(alpha: 0.1)
+                            : Colors.green.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: isUnderMaintenance
-                              ? Colors.orange.withOpacity(0.3)
-                              : Colors.green.withOpacity(0.3),
+                          color: widget.isUnderMaintenance
+                              ? Colors.orange.withValues(alpha: 0.3)
+                              : Colors.green.withValues(alpha: 0.3),
                         ),
                       ),
                       child: Text(
-                        isUnderMaintenance ? 'ACTIVE' : 'INACTIVE',
+                        widget.isUnderMaintenance ? 'ACTIVE' : 'INACTIVE',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: isUnderMaintenance
+                          color: widget.isUnderMaintenance
                               ? Colors.orange.shade700
                               : Colors.green.shade700,
                           letterSpacing: 1.2,
@@ -130,16 +138,14 @@ class _HomePageState extends State<HomePage> {
               // Toggle Button
               FilledButton.tonal(
                 onPressed: () {
-                  setState(() {
-                    isUnderMaintenance = !isUnderMaintenance;
-                  });
+                  widget.onMaintenanceChanged(!widget.isUnderMaintenance);
                 },
                 style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: isUnderMaintenance
+                  backgroundColor: widget.isUnderMaintenance
                       ? Colors.green
                       : colorScheme.primaryContainer,
-                  foregroundColor: isUnderMaintenance
+                  foregroundColor: widget.isUnderMaintenance
                       ? Colors.white
                       : colorScheme.onPrimaryContainer,
                 ),
@@ -147,14 +153,14 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      isUnderMaintenance
+                      widget.isUnderMaintenance
                           ? Icons.check_circle_outline
                           : Icons.power_settings_new,
                       size: 20,
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      isUnderMaintenance
+                      widget.isUnderMaintenance
                           ? 'Deactivate maintenance'
                           : 'Activate maintenance',
                       style: const TextStyle(
@@ -165,6 +171,38 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+              // Callback Events Display
+              if (widget.lastBannerEvent != null) ...[
+                const SizedBox(height: 24),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer.withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: colorScheme.primary.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        size: 20,
+                        color: colorScheme.primary,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          widget.lastBannerEvent!,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: colorScheme.onPrimaryContainer,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
               const SizedBox(height: 48),
               // Features Section
               Container(
@@ -224,6 +262,20 @@ class _HomePageState extends State<HomePage> {
                       'Custom icon',
                       colorScheme,
                     ),
+                    const SizedBox(height: 12),
+                    _buildFeatureItem(
+                      context,
+                      Icons.animation,
+                      'Smooth animations',
+                      colorScheme,
+                    ),
+                    const SizedBox(height: 12),
+                    _buildFeatureItem(
+                      context,
+                      Icons.notifications_active,
+                      'Callback events',
+                      colorScheme,
+                    ),
                   ],
                 ),
               ),
@@ -246,7 +298,7 @@ class _HomePageState extends State<HomePage> {
         Container(
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: colorScheme.primaryContainer.withOpacity(0.5),
+            color: colorScheme.primaryContainer.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(

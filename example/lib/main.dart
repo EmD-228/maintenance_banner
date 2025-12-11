@@ -15,6 +15,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isUnderMaintenance = true;
+  String? _lastBannerEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,19 @@ class _MyAppState extends State<MyApp> {
       ),
       home: MaintenanceWrapper(
         isUnderMaintenance: isUnderMaintenance,
+        animationDuration: const Duration(milliseconds: 400),
+        onBannerShown: () {
+          setState(() {
+            _lastBannerEvent = 'Banner shown at ${DateTime.now().toString().substring(11, 19)}';
+          });
+          debugPrint('Maintenance banner is now visible');
+        },
+        onBannerHidden: () {
+          setState(() {
+            _lastBannerEvent = 'Banner hidden at ${DateTime.now().toString().substring(11, 19)}';
+          });
+          debugPrint('Maintenance banner is now hidden');
+        },
         banner: Container(
           height: 40,
           decoration: BoxDecoration(
@@ -61,7 +75,15 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
-        child: const HomePage(),
+        child: HomePage(
+          isUnderMaintenance: isUnderMaintenance,
+          onMaintenanceChanged: (value) {
+            setState(() {
+              isUnderMaintenance = value;
+            });
+          },
+          lastBannerEvent: _lastBannerEvent,
+        ),
       ),
     );
   }
