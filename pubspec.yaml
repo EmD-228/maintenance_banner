@@ -1,6 +1,6 @@
 name: maintenance_banner
 description: A Flutter package for displaying maintenance banners in your app
-version: 0.2.1
+version: 0.2.2
 homepage: https://github.com/EmD-228/maintenance_banner
 
 environment:

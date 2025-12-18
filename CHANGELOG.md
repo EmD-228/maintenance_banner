@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2024-12-11
+
+### Changed
+- Updated README to use HTML image format for better display on pub.dev
+- Updated installation instructions to reflect version 0.2.1
+
 ## [0.2.1] - 2024-12-11
 
 ### Fixed
