@@ -2,7 +2,9 @@
 
 A Flutter package for displaying customizable maintenance banners at the top of your app.
 
-![Screenshot](doc/screenshot.png)
+<img src="https://raw.githubusercontent.com/EmD-228/maintenance_banner/main/doc/screenshot.png" width="200" alt="Maintenance Banner"/>
+
+<br/><b>Maintenance Banner</b>
 
 ## Features
 
@@ -20,7 +22,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  maintenance_banner: ^0.2.0
+  maintenance_banner: ^0.2.1
 ```
 
 Then run:
@@ -165,7 +167,9 @@ flutter pub get
 flutter run
 ```
 
-![Example Screenshot](doc/screenshot.png)
+<img src="https://raw.githubusercontent.com/EmD-228/maintenance_banner/main/doc/screenshot.png" width="200" alt="Maintenance Banner Example"/>
+
+<br/><b>Maintenance Banner Example</b>
 
 ## Requirements
 
