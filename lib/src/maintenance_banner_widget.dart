@@ -66,12 +66,17 @@ class MaintenanceBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.of(context).padding.top;
-    final spacing = (padding - 8).clamp(0.0, double.infinity);
-    final bannerHeight = topPadding ?? padding - 8;
+    // Calculate safe spacing (padding - 8, clamped to prevent negative values)
+    final safeSpacing = (padding - 8).clamp(0.0, double.infinity);
+    // Calculate banner height, ensuring it's never negative
+    final calculatedBannerHeight = topPadding ?? safeSpacing;
+    final bannerHeight = calculatedBannerHeight.clamp(0.0, double.infinity);
 
-    // Trigger callbacks
+    // Trigger callbacks after animation completes
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      onBannerShown?.call();
+      Future.delayed(animationDuration, () {
+        onBannerShown?.call();
+      });
     });
 
     return Stack(
@@ -84,7 +89,7 @@ class MaintenanceBannerWidget extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (spacing > 0) SizedBox(height: spacing),
+              if (safeSpacing > 0) SizedBox(height: safeSpacing),
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0.0, end: 1.0),
                 duration: animationDuration,

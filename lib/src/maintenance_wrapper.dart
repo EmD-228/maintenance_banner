@@ -17,7 +17,7 @@ import 'maintenance_banner_widget.dart';
 ///   child: MyApp(),
 /// )
 /// ```
-class MaintenanceWrapper extends StatelessWidget {
+class MaintenanceWrapper extends StatefulWidget {
   /// Creates a maintenance wrapper widget.
   ///
   /// The [isUnderMaintenance], [banner], and [child] parameters are required.
@@ -86,23 +86,37 @@ class MaintenanceWrapper extends StatelessWidget {
   final VoidCallback? onBannerHidden;
 
   @override
+  State<MaintenanceWrapper> createState() => _MaintenanceWrapperState();
+}
+
+class _MaintenanceWrapperState extends State<MaintenanceWrapper> {
+  @override
+  void didUpdateWidget(MaintenanceWrapper oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Only trigger callbacks on actual state transitions
+    if (oldWidget.isUnderMaintenance != widget.isUnderMaintenance) {
+      if (!widget.isUnderMaintenance && oldWidget.isUnderMaintenance) {
+        // Banner was hidden (transition from true to false)
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          widget.onBannerHidden?.call();
+        });
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (isUnderMaintenance) {
+    if (widget.isUnderMaintenance) {
       return MaintenanceBannerWidget(
-        banner: banner,
-        child: child,
-        topPadding: topPadding,
-        animationDuration: animationDuration,
-        onBannerShown: onBannerShown,
-        onBannerHidden: onBannerHidden,
+        banner: widget.banner,
+        child: widget.child,
+        topPadding: widget.topPadding,
+        animationDuration: widget.animationDuration,
+        onBannerShown: widget.onBannerShown,
+        onBannerHidden: widget.onBannerHidden,
       );
     }
 
-    // Trigger hidden callback when banner is not shown
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      onBannerHidden?.call();
-    });
-
-    return child;
+    return widget.child;
   }
 }

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2024-12-11
+
+### Fixed
+- Fixed padding calculation to prevent negative values when safe area padding is less than 8 pixels
+- Fixed callback timing: `onBannerHidden` now only triggers on actual state transitions (from `true` to `false`)
+- Fixed `onBannerShown` callback to fire after animation completes instead of immediately
+- Improved state management by converting `MaintenanceWrapper` to `StatefulWidget` for proper callback tracking
+
 ## [0.2.0] - 2024-12-11
 
 ### Added
